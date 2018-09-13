@@ -129,15 +129,16 @@ newGameBtn.addEventListener('click', function() {
     compWin = 0;
     tableResult = document.getElementById('result').innerHTML= playerWin + ' : ' + compWin;
     targetScore = window.prompt('Put number of victories to win it all');
-    parseInt(targetScore);
     
     if(isNaN(targetScore) || targetScore === null || targetScore === ''){
       alert('Don\'t make computer wait - put a correct number');
     }
+    else if( targetScore <= 0 ){
+        alert('Be serious!');
+    }
     else {
-    gameTarget = document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + targetScore + ' WINS. MAY THE BEST MAN WIN!';
-    return targetScore;
-      }
+        gameTarget = document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + targetScore + ' WINS. MAY THE BEST MAN WIN!';
+    }
     
     
   });
