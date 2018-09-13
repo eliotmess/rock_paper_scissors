@@ -2,7 +2,7 @@
 
 var output = document.getElementById('output').insertAdjacentHTML("afterbegin", "Try yourself and play against real computer - take your pick!" + '<br>');
 
-//funkcja ruchu gracza
+//zmienne
 
 var rockBtn = document.getElementById('rock');
 var paperBtn = document.getElementById('paper');
@@ -23,7 +23,7 @@ var gameContinue = true;
 var newGameBtn = document.getElementById('newgame');
 
 
-
+// funkcja zakończenia gry
 
 finalScore = function() {
   if( playerWin == targetScore ) {
@@ -38,6 +38,7 @@ finalScore = function() {
   };
 };
 
+//funkcje przycisków ruchów
 
 rockBtn.addEventListener('click', function(event){
   
@@ -119,7 +120,7 @@ duelScore = function() {
   }
 };
 
-// wynik w outpucie
+// prompt
 
 
 newGameBtn.addEventListener('click', function() {
