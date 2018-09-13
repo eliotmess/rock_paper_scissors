@@ -1,6 +1,6 @@
 'use strict';
 
-var output = document.getElementById('output').insertAdjacentHTML("afterbegin", "Try yourself and play against real computer - take your pick!" + '<br>');
+var output = document.getElementById('output').insertAdjacentHTML("afterbegin", "Try yourself and play against real computer - PUSH START!" + '<br>');
 
 //zmienne
 
