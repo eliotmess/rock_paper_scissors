@@ -4,11 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Choose wisely
+    <title>Play against the machine
     </title>
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+    <main>
+        <header>
+            <h1>rock - paper - scissors</h1>
+            <div class="game-end" id='gameend'>
+        </header>
+        <div class="container">
+            <div class="game-area">
+                <div class="comp">
+                    <img src="http://pixelartmaker.com/art/f1dd5233ac80be4.png" alt="">
+                    <div class="comp-answer" id="comp-answer"></div>
+                </div>
+                <h2>Choose your move!</h2>
+                <div class="player-answer">
+                    <button id="rock">
+                        <h3>ROCK</h3>
+                    </button>
+                    <button id="paper">
+                        <h3>PAPER</h3>
+                    </button>
+                    <button id="scissors">
+                        <h3>SCISSORS</h3>
+                    </button>
+                </div>
+            </div>
+            <div class="interface-area">
+                <div class="output" id="output"></div>
+                <div class="score" id="result"></div>
+                <button class="game-new" id="newgame">PUSH START</button>
+            </div>
+        </div>
+        <footer>
+            <p>GO 2018</p>
+        </footer>
+    </main>
+    <script src="js/script.js"></script>
 </body>
 </html>
