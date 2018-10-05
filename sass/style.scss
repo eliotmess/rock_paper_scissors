@@ -26,8 +26,8 @@ body {
 }
 
 main {
-    max-height: 1200px;
     background: #747474;
+    height: 100vh;
 }
 
 header {
@@ -42,7 +42,7 @@ header {
     }
     .game-end {
         text-align: center;
-        color: #CDA94B;
+        color: #EDC472;
         font-size: 40px;
     }
 }
@@ -51,15 +51,14 @@ header {
     display: flex;
     max-width: 1500px;
     margin: 0 auto;
-    height: 100%;
 
     .game-area {
         padding: 40px 10px;
         width: 66%;
-        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 100vh;
 
         .comp {
             display: flex;
@@ -90,7 +89,7 @@ header {
             padding-bottom: 75px;
             text-align: center;
             font-size: 70px;
-            color: #CDA94B;
+            color: #EDC472;
         }
         .player-answer {
             display: flex;
@@ -132,7 +131,7 @@ header {
           color: white;
           width: 100%;
           text-align: center;
-          color: #CDA94B;
+          color: #EDC472;
           padding-bottom: 50px;
         }
 

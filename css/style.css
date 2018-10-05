@@ -26,17 +26,17 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 body { margin: 0; font-family: 'VT323', monospace; background: #747474; }
 
-main { max-height: 1200px; background: #747474; }
+main { background: #747474; height: 100vh; }
 
 header { background: #010101; padding: 30px 0; }
 
 header h1 { font-size: 100px; padding-bottom: 15px; color: #d02751; text-align: center; }
 
-header .game-end { text-align: center; color: #CDA94B; font-size: 40px; }
+header .game-end { text-align: center; color: #EDC472; font-size: 40px; }
 
-.container { display: -ms-flexbox; display: flex; max-width: 1500px; margin: 0 auto; height: 100%; }
+.container { display: -ms-flexbox; display: flex; max-width: 1500px; margin: 0 auto; }
 
-.container .game-area { padding: 40px 10px; width: 66%; height: 100vh; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; }
+.container .game-area { padding: 40px 10px; width: 66%; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; height: 100vh; }
 
 .container .game-area .comp { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; padding-bottom: 100px; padding-top: 30px; }
 
@@ -44,7 +44,7 @@ header .game-end { text-align: center; color: #CDA94B; font-size: 40px; }
 
 .container .game-area .comp img { height: 300px; width: auto; padding-right: 60px; }
 
-.container .game-area h2 { padding-bottom: 75px; text-align: center; font-size: 70px; color: #CDA94B; }
+.container .game-area h2 { padding-bottom: 75px; text-align: center; font-size: 70px; color: #EDC472; }
 
 .container .game-area .player-answer { display: -ms-flexbox; display: flex; padding: 10px; -ms-flex-pack: space-evenly; justify-content: space-evenly; width: 100%; padding: 0 0 100px 0; }
 
@@ -52,6 +52,6 @@ header .game-end { text-align: center; color: #CDA94B; font-size: 40px; }
 
 .container .interface-area .output { height: 350px; width: 100%; background: #010101; overflow-y: scroll; font-size: 20px; line-height: 1.5; padding: 0 25px; color: #ffffff; margin-bottom: 50px; }
 
-.container .interface-area .score { font-size: 115px; color: white; width: 100%; text-align: center; color: #CDA94B; padding-bottom: 50px; }
+.container .interface-area .score { font-size: 115px; color: white; width: 100%; text-align: center; color: #EDC472; padding-bottom: 50px; }
 
 footer { background: #006332; padding: 20px; color: white; font-size: 30px; text-align: center; }
