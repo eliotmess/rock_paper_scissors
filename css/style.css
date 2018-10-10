@@ -57,7 +57,7 @@ table {
   border-spacing: 0;
 }
 
-.container .game-area .player-answer button, .container .interface-area .game-new {
+.container .overlay .modal form button, .container .game-area .player-answer button, .container .interface-area .game-new {
   padding: 20px 35px;
   font-size: 50px;
   color: white;
@@ -66,7 +66,7 @@ table {
   font-family: 'VT323', monospace;
 }
 
-.container .game-area .player-answer button:hover, .container .interface-area .game-new:hover {
+.container .overlay .modal form button:hover, .container .game-area .player-answer button:hover, .container .interface-area .game-new:hover {
   background: #d02751;
   cursor: pointer;
 }
@@ -153,6 +153,21 @@ header .game-end {
   -ms-flex-align: center;
       align-items: center;
   text-transform: uppercase;
+  position: relative;
+}
+
+.container .overlay .modal h4 {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #d02751;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.container .overlay .modal h4:hover {
+  cursor: pointer;
+  color: #94FEED;
 }
 
 .container .overlay .modal h2 {
@@ -184,9 +199,54 @@ header .game-end {
   }
 }
 
+.container .overlay .modal form {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.container .overlay .modal form label {
+  color: #EDC472;
+  font-size: 35px;
+  padding: 20px 0 10px 0;
+}
+
+.container .overlay .modal form input {
+  line-height: 1.5;
+  font-size: 30px;
+  padding: 10px 25px;
+  width: 400px;
+  background: #010101;
+  border: 2px solid #94FEED;
+  color: white;
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+}
+
+.container .overlay .modal form input[type=number]::-webkit-inner-spin-button, .container .overlay .modal form input[type=number]::-webkit-outer-spin-button {
+  opacity: 0;
+}
+
+.container .overlay .modal form p {
+  position: absolute;
+}
+
+.container .overlay .modal form button {
+  width: 60%;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 40px 0 20px 0;
+  padding: 15px 50px;
+  font-size: 35px;
+}
+
 .container .overlay .modal .score-table-wrapper {
   max-height: 300px;
-  overflow: auto;
+  overflow-y: scroll;
 }
 
 .container .overlay .modal .score-table-wrapper::-webkit-scrollbar {
@@ -338,6 +398,15 @@ header .game-end {
   padding: 0 25px;
   color: white;
   margin-bottom: 50px;
+}
+
+.container .interface-area .output::-webkit-scrollbar {
+  width: 20px;
+  background: #010101;
+}
+
+.container .interface-area .output::-webkit-scrollbar-thumb {
+  background: white;
 }
 
 .container .interface-area .score {

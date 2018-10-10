@@ -13,11 +13,24 @@
     <main>
         <header>
             <h1>rock - paper - scissors</h1>
-            <div class="game-end" id='gameend'>
+            <div class="game-end" id='gameend'></div>
         </header>
         <div class="container">
             <div class="overlay" id="modal-overlay">
+                <div class="modal modal-new-game">
+                    <h4 class="close-modal-button">x</h4>
+                    <h2>start new game</h2>
+                    <form action="" method="">
+                        <label>your name</label>
+                        <input type="text" name="user-name">
+                        <label>number of plays</label>
+                        <input type="number" name="target-score">
+                        <div></div>
+                        <button type="submit">PLAY</button>
+                    </form>
+                </div>
                 <div class="modal modal-game-over">
+                    <h4 class="close-modal-button">x</h4>
                     <div class="game-over-message">
                     </div>
                     <div class="score-table-wrapper">

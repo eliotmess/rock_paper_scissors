@@ -20,18 +20,18 @@ output.insertAdjacentHTML("afterbegin", "Try yourself and play against real comp
 
 var gameEnd = function() {
   if( params.playerWin == params.targetScore ) {
-    showModal();
-    document.querySelector('.modal-game-over div').innerHTML = '<h2>you win!</h2> <p>computer lost, for now</p>';
+    showModalGameOver();
+    document.querySelector('.game-over-message').innerHTML = '<h2>you win!</h2> <p>computer lost, for now</p>';
     output.insertAdjacentHTML("afterbegin", '<br>' + ' YOU WIN! COMPUTER LOST, FOR NOW ' +  '<br>' + '<br>');
     compAnswer.innerHTML= '<div> :-/ </div>';
-    document.querySelector('.comp-answer div').classList.add('move');
+    document.querySelector('#comp-answer div').classList.add('move');
     params.gameContinue = false;
   } else if( params.compWin == params.targetScore ) {
-    showModal();
-    document.querySelector('.modal-game-over div').innerHTML = '<h2>you lose!</h2> <p>computer played you again</p>';
+    showModalGameOver();
+    document.querySelector('.game-over-message').innerHTML = '<h2>you lose!</h2> <p>computer played you again</p>';
     output.insertAdjacentHTML("afterbegin", '<br>' + ' YOU LOSE! COMPUTER PLAYED YOU AGAIN ' +  '<br>' + '<br>');
     compAnswer.innerHTML= '<div> ;-) </div>';
-    document.querySelector('.game-over-message').classList.add('move');
+    document.querySelector('#comp-answer div').classList.add('move');
     params.gameContinue = false;
   };
 };
@@ -102,36 +102,57 @@ newGameBtn.addEventListener('click', function() {
     params.compWin = 0;
     compAnswer.innerHTML='';
     tableResult = document.getElementById('result').innerHTML= params.playerWin + ' : ' + params.compWin;
-    params.targetScore = Math.round(window.prompt('Put number of victories to win it all'));
+    showModalNewGame();
+    document.querySelector('form div').innerHTML = '';
     params.playId = 0;
     document.querySelector('table tbody').innerHTML = '';
-    
-    if(isNaN(params.targetScore) || params.targetScore === null || params.targetScore === ''){
-      alert('Don\'t make computer wait - put a correct number');
-    } else if( params.targetScore <= 0 ){
-      alert('Be serious!');
-    } else {
-      document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + params.targetScore + ' WINS. MAY THE BEST MAN WIN!';
-    } 
-  });
+});
 
 
 // MODALE
-
-var showModal = function(e) {
+// jeśli modal nie jest połączony z buttonem tylko otwiera go wywołanie danej funkcji - czy da się skrócić zapis podobnie jak wcześniej
+var showModalGameOver = function() {
   document.querySelector('#modal-overlay').classList.add('show');
-  document.querySelector('.modal').classList.add('show');
+  document.querySelector('.modal-game-over').classList.add('show');
 }
 
-var hideModal = function(e) {
+var showModalNewGame = function() {
+  document.querySelector('#modal-overlay').classList.add('show');
+  document.querySelector('.modal-new-game').classList.add('show');
+}
+
+var hideModal = function() {
   document.querySelector('#modal-overlay').classList.remove('show');
+  var modals = document.querySelectorAll('.modal');
+  for(i = 0; i < modals.length; i++){
+    modals[i].classList.remove('show');
+  }
 };
 
-// document.querySelector('#modal-overlay').addEventListener('click', hideModal);
+var closeModalButtons = document.querySelectorAll('.close-modal-button');
+for(i = 0; i < closeModalButtons.length; i++){
+  closeModalButtons[i].addEventListener('click', hideModal);
+}
 
 document.addEventListener('keydown', function(e) {
   if(e.keyCode === 32) {
       hideModal();
+  }
+});
+
+// modal - new game
+
+document.querySelector('.modal-new-game button[type="submit"]').addEventListener('click', function(e){
+  e.preventDefault();
+  params.targetScore = document.querySelector('.modal-new-game input[type="number"]').value;
+  params.userName = document.querySelector('.modal-new-game input[type="text"]').value;
+
+  if(params.targetScore.length > 0 && params.targetScore > 0){
+    hideModal();
+    params.targetScore = Math.round(params.targetScore);
+    document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + params.targetScore + ' WINS ' + params.userName + '. MAY THE BEST MAN WIN.';
+  } else {
+    document.querySelector('form div').innerHTML = '<p>Error! Put correct data.</p>';
   }
 });
 
@@ -158,21 +179,3 @@ function scoreTable() {
   
   
   };
- /*
-  DLACZEGO Z DATA-INDEX NIE ZADZIAŁAŁO??
-
-  if(document.querySelector('table tr').getAttribute('data-index') == params.playId){
-    
-  }
-  var currentPlay = document.querySelectorAll('table tr');
-
-  for(i = 0; i < currentPlay.length; i++){
-
-    if(currentPlay[i].getAttribute('data-index') == params.playId) {
-      if(params.isCompWon) {
-        document.querySelector('table tr #comp-move').classList.add('winner');
-      } else {
-        document.querySelector('table tr #player-move').classList.add('winner');
-    }
-  
-  }*/
