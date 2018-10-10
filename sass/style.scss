@@ -1,18 +1,27 @@
 @import 'reset';
 
+$logo-color: #d02751;
+$digit-color: white;
+$background-color: #747474;
+$border-color: #94FEED;
+$comp-color: #EDC472;
+$interface-color: #006332;
+$screen-color: #010101;
+
 %button {
     padding: 20px 35px;
             font-size: 50px;
-            color: white;
-            background: #010101;
-            border: 4px solid #94FEED;
+            color: $digit-color;
+            background: $screen-color;
+            border: 4px solid $border-color;
             font-family: 'VT323', monospace;
 
             &:hover {
-                background: #d02751;
+                background: $logo-color;
                 cursor: pointer;
             }
 }
+
 
 
 * {
@@ -22,27 +31,34 @@
 body {
     margin: 0;
     font-family: 'VT323', monospace;
-    background: #747474;
+    background: $background-color;
 }
 
 main {
-    background: #747474;
-    height: 100vh;
+    background: $background-color;
+    padding-top: 200px;
 }
 
 header {
-    background: #010101;
-    padding: 30px 0;
+    background: $screen-color;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
 
     h1 {
         font-size: 100px;
-        padding-bottom: 15px;
-        color: #d02751;
-        text-align: center;
+        color: $logo-color;
+        padding-bottom: 6px;
     }
     .game-end {
         text-align: center;
-        color: #EDC472;
+        color: $comp-color;
         font-size: 40px;
     }
 }
@@ -51,6 +67,106 @@ header {
     display: flex;
     max-width: 1500px;
     margin: 0 auto;
+    min-height: calc(100vh - 200px);
+
+    .overlay {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0);
+        
+        &.show {
+            display: flex;
+        }
+
+        .modal {
+            padding: 25px 50px;
+            background: $screen-color;
+            border: 8px solid $border-color;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-transform: uppercase;
+
+
+            h2 {
+                font-size: 85px;
+                color: $logo-color;
+            }
+
+            p {
+                color: $comp-color;
+                font-size: 30px;
+
+                &:first-of-type {
+                    padding-bottom: 25px;
+                }
+
+                &.close-modal-press {
+                    padding-top: 25px;
+                    padding-bottom: 0;
+                    animation: .5s click-to-continue infinite;
+
+                    @keyframes click-to-continue {
+                        0% { opacity: 0 }
+                        50% { opacity: 1 }
+                    }
+                }
+            }
+
+            .score-table-wrapper {
+                max-height: 300px;
+                overflow: auto;
+                
+                &::-webkit-scrollbar {
+                    width: 20px;
+                    background: $logo-color;
+                }
+
+                &::-webkit-scrollbar-track {
+                    border: 2px solid $logo-color;
+                }
+                
+                &::-webkit-scrollbar-thumb {
+                    background: $screen-color; 
+                    border: 2px solid $logo-color;
+                    border-left: none;
+                }
+
+                table {
+                    border: 2px solid $logo-color;
+                    border-right: none;
+    
+                    th, td {
+                        line-height: 1.8;
+                        width: 100px;
+                        font-size: 25px;
+                        text-align: center;
+                        color: $digit-color;
+    
+                        &:nth-child(2), &:nth-child(3) {
+                            width: 145px;
+                        }
+    
+                        &.winner {
+                            background: $logo-color;
+                        }
+                    }
+                }
+            }
+
+            &.show {
+                display: flex;
+            }
+            
+        }
+    }
 
     .game-area {
         padding: 40px 10px;
@@ -58,7 +174,6 @@ header {
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 100vh;
 
         .comp {
             display: flex;
@@ -70,13 +185,41 @@ header {
             .comp-answer {
                 width: 250px;
                 height: 250px;
-                border: 8px solid #94FEED;
-                background: #010101;
-                color: white;
+                border: 8px solid $border-color;
+                background: $screen-color;
+                color: $digit-color;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 font-size: 70px;
+
+                div {
+
+                    &.move {
+                        color: $logo-color;
+                        position: relative;
+                        animation: screensaver 5s linear infinite;
+                    }
+
+                    @keyframes screensaver {
+                        0%   { 
+                            left: 33.5%;
+                            bottom: 25%; }
+                        20% {
+                            left: -5%;
+                            bottom: 40%; }
+                        47% {
+                            left: -36%;
+                            bottom: 4%; }
+                        73% {
+                            left: 10%;
+                            bottom: -36%; }
+                        100% {
+                            left: 33.5%;
+                            bottom: 25%; }
+                    }
+
+                }
             }
             img {
                 height: 300px;
@@ -89,11 +232,10 @@ header {
             padding-bottom: 75px;
             text-align: center;
             font-size: 70px;
-            color: #EDC472;
+            color: $comp-color;
         }
         .player-answer {
             display: flex;
-            padding: 10px;
             justify-content: space-evenly;
             width: 100%;
             padding: 0 0 100px 0;
@@ -117,21 +259,21 @@ header {
         .output {
             height: 350px;
             width: 100%;
-            background: #010101;
+            background: $screen-color;
             overflow-y: scroll;
             font-size: 20px;
             line-height: 1.5;
             padding: 0 25px;
-            color: #ffffff;
+            color: $digit-color;
             margin-bottom: 50px;
         }
       
         .score {
           font-size: 115px;
-          color: white;
+          color: $digit-color;
           width: 100%;
           text-align: center;
-          color: #EDC472;
+          color: $comp-color;
           padding-bottom: 50px;
         }
 
@@ -143,9 +285,13 @@ header {
 }
 
 footer {
-    background: rgba(0,99,50,1);
-    padding: 20px;
-    color: white;
+    background: $interface-color;
+    padding: 10px;
+    color: $digit-color;
     font-size: 30px;
     text-align: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }

@@ -1,44 +1,38 @@
 'use strict';
 
-var output = document.getElementById('output');
-output.insertAdjacentHTML("afterbegin", "Try yourself and play against real computer - PUSH START!" + '<br>');
 
-//zmienne
+//parametry gry
 
 var params = {};
 
-var playerMove;
-var compMove;
-var compValue;
-var duelScore;
-var targetScore = 3;
+params.gameContinue = true;
+params.playerWin = 0;
+params.compWin = 0;
+params.playId = 0;
 
-var playerWin = 0;
-var compWin = 0;
-var tableResult = document.getElementById('result').innerHTML= playerWin + ' : ' + compWin;
-
-
+var tableResult = document.getElementById('result').innerHTML= params.playerWin + ' : ' + params.compWin;
 var compAnswer = document.getElementById('comp-answer');
-
-var gameContinue = true;
-
 var newGameBtn = document.getElementById('newgame');
-
-
+var output = document.getElementById('output');
+output.insertAdjacentHTML("afterbegin", "Try yourself and play against real computer - PUSH START!" + '<br>');
 
 // funkcja zakończenia gry
 
-var finalScore = function() {
-  if( playerWin == targetScore ) {
-    output.insertAdjacentHTML("afterbegin", '<br>' + ' YOU WON WITH COMPUTER, FOR NOW ' +  '<br>' + '<br>');
-    compAnswer.innerHTML=' :-/ ';
-    gameContinue = false;
-    return gameContinue;
-  } else if( compWin == targetScore ) {
+var gameEnd = function() {
+  if( params.playerWin == params.targetScore ) {
+    showModal();
+    document.querySelector('.modal-game-over div').innerHTML = '<h2>you win!</h2> <p>computer lost, for now</p>';
+    output.insertAdjacentHTML("afterbegin", '<br>' + ' YOU WIN! COMPUTER LOST, FOR NOW ' +  '<br>' + '<br>');
+    compAnswer.innerHTML= '<div> :-/ </div>';
+    document.querySelector('.comp-answer div').classList.add('move');
+    params.gameContinue = false;
+  } else if( params.compWin == params.targetScore ) {
+    showModal();
+    document.querySelector('.modal-game-over div').innerHTML = '<h2>you lose!</h2> <p>computer played you again</p>';
     output.insertAdjacentHTML("afterbegin", '<br>' + ' YOU LOSE! COMPUTER PLAYED YOU AGAIN ' +  '<br>' + '<br>');
-    compAnswer.innerHTML=' ;-) ';
-    gameContinue = false;
-    return gameContinue;
+    compAnswer.innerHTML= '<div> ;-) </div>';
+    document.querySelector('.game-over-message').classList.add('move');
+    params.gameContinue = false;
   };
 };
 
@@ -48,11 +42,11 @@ var moveBtns = document.querySelectorAll('.player-move');
 
 for (var i = 0; i < moveBtns.length; i++){
   moveBtns[i].addEventListener('click', function(){
-    if(gameContinue === true){
-      playerMove = this.getAttribute('data-move').toUpperCase();
-      compMove();
-      duelScore();
-      finalScore();
+    if(params.gameContinue){
+      params.playerMove = this.getAttribute('data-move').toUpperCase();
+      compDecision();
+      moveCompare();
+      gameEnd();
     } else {
       output.insertAdjacentHTML("afterbegin", ' Start new game ' +  '<br>');
     }
@@ -61,56 +55,124 @@ for (var i = 0; i < moveBtns.length; i++){
 
 // Generator ruchu komputera
 
-compMove = function(event) {
+var compDecision = function(event) {
 
-  var compMove = Math.floor( Math.random() * 3 + 1 );
+  params.compRandom = Math.floor( Math.random() * 3 + 1 );
 
-  if (compMove === 1) {
-    compValue = 'PAPER';
-  } else if (compMove === 2) {
-    compValue = 'ROCK';
+  if (params.compRandom === 1) {
+    params.compMove = 'PAPER';
+  } else if (params.compRandom === 2) {
+    params.compMove = 'ROCK';
   } else {
-    compValue = 'SCISSORS';
+    params.compMove = 'SCISSORS';
   }
-  compAnswer.innerHTML = compValue;
+  compAnswer.innerHTML = params.compMove
+;
 };
 
 // PORÓWNANIE WYNIKÓW
 
-duelScore = function() {
-  if ( (playerMove === 'PAPER' && compValue === 'ROCK') || (playerMove === 'SCISSORS' && compValue === 'PAPER') || (playerMove === 'ROCK' && compValue === 'SCISSORS') ) {
-    output.insertAdjacentHTML("afterbegin", ' You Win! ' + ' You chose ' +  playerMove + ' and played computer\'s ' + compValue +  '<br>');
-    playerWin ++;
-    tableResult = document.getElementById('result').innerHTML= playerWin + ' : ' + compWin;
-  } else if ( (playerMove === 'ROCK' && compValue === 'PAPER') || (playerMove === 'PAPER' && compValue === 'SCISSORS') || (playerMove === 'SCISSORS' && compValue === 'ROCK') ) {
-    output.insertAdjacentHTML("afterbegin", ' You Lose! ' + ' You chose ' +  playerMove + ' and computer got you good with ' + compValue +  '<br>');
-    compWin ++;
-    tableResult = document.getElementById('result').innerHTML= playerWin + ' : ' + compWin;
+var moveCompare = function() {
+  params.playId++;
+  if ( (params.playerMove === 'PAPER' && params.compMove === 'ROCK') || (params.playerMove === 'SCISSORS' && params.compMove === 'PAPER') || (params.playerMove === 'ROCK' && params.compMove === 'SCISSORS') ) {
+    output.insertAdjacentHTML("afterbegin", ' You Win! ' + ' You chose ' +  params.playerMove + ' and played computer\'s ' + params.compMove +  '<br>');
+    params.playerWin ++;
+    params.isCompWon = false;
+    params.isDraw = false;
+    tableResult = document.getElementById('result').innerHTML= params.compWin + ' : ' + params.playerWin;
+  } else if ( (params.playerMove === 'ROCK' && params.compMove === 'PAPER') || (params.playerMove === 'PAPER' && params.compMove === 'SCISSORS') || (params.playerMove === 'SCISSORS' && params.compMove === 'ROCK') ) {
+    output.insertAdjacentHTML("afterbegin", ' You Lose! ' + ' You chose ' +  params.playerMove + ' and computer got you good with ' + params.compMove +  '<br>');
+    params.isCompWon = true;
+    params.isDraw = false; // dlaczego nie !params.isDraw ? Jak uniknąć powtórzeń?
+    params.compWin ++;
+    tableResult = document.getElementById('result').innerHTML= params.compWin + ' : ' + params.playerWin;
   } else {
-    output.insertAdjacentHTML("afterbegin", ' It\'s a tie! ' + ' You chose ' +  playerMove + ' and computer guess what - ' + compValue +  '<br>');
+    params.isDraw = true;
+    output.insertAdjacentHTML("afterbegin", ' It\'s a tie! ' + ' You chose ' +  params.playerMove + ' and computer guess what - ' + params.compMove +  '<br>');
   }
+  scoreTable();
 };
 
 // prompt
 
 
 newGameBtn.addEventListener('click', function() {
-    gameContinue = true;
-    playerWin = 0;
-    compWin = 0;
+    params.gameContinue = true;
+    params.playerWin = 0;
+    params.compWin = 0;
     compAnswer.innerHTML='';
-    tableResult = document.getElementById('result').innerHTML= playerWin + ' : ' + compWin;
-    targetScore = Math.round(window.prompt('Put number of victories to win it all'));
+    tableResult = document.getElementById('result').innerHTML= params.playerWin + ' : ' + params.compWin;
+    params.targetScore = Math.round(window.prompt('Put number of victories to win it all'));
+    params.playId = 0;
+    document.querySelector('table tbody').innerHTML = '';
     
-    if(isNaN(targetScore) || targetScore === null || targetScore === ''){
+    if(isNaN(params.targetScore) || params.targetScore === null || params.targetScore === ''){
       alert('Don\'t make computer wait - put a correct number');
-    }
-    else if( targetScore <= 0 ){
+    } else if( params.targetScore <= 0 ){
       alert('Be serious!');
-    }
-    else {
-      document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + targetScore + ' WINS. MAY THE BEST MAN WIN!';
-    }
-    
-    
+    } else {
+      document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + params.targetScore + ' WINS. MAY THE BEST MAN WIN!';
+    } 
   });
+
+
+// MODALE
+
+var showModal = function(e) {
+  document.querySelector('#modal-overlay').classList.add('show');
+  document.querySelector('.modal').classList.add('show');
+}
+
+var hideModal = function(e) {
+  document.querySelector('#modal-overlay').classList.remove('show');
+};
+
+// document.querySelector('#modal-overlay').addEventListener('click', hideModal);
+
+document.addEventListener('keydown', function(e) {
+  if(e.keyCode === 32) {
+      hideModal();
+  }
+});
+
+// modal - game-over tabela
+
+function scoreTable() {
+
+  document.querySelector('table tbody').innerHTML += '<tr id="' + params.playId + '"> \
+  <td>' + params.playId + '</td> \
+  <td id="comp-move">' + params.compMove + '</td> \
+  <td id="player-move">' + params.playerMove + '</td> \
+  <td>' + params.compWin + ' : ' + params.playerWin + '</td> </tr>';
+
+  var gameData = document.querySelectorAll('table tbody tr');
+  for(i = 0; i < gameData.length; i++){
+    if(gameData[i].id == params.playId && !params.isDraw){
+      if(params.isCompWon) {
+        gameData[i].querySelector('#comp-move').classList.add('winner');
+      } else {
+        gameData[i].querySelector('#player-move').classList.add('winner');
+      }
+    }
+  };
+  
+  
+  };
+ /*
+  DLACZEGO Z DATA-INDEX NIE ZADZIAŁAŁO??
+
+  if(document.querySelector('table tr').getAttribute('data-index') == params.playId){
+    
+  }
+  var currentPlay = document.querySelectorAll('table tr');
+
+  for(i = 0; i < currentPlay.length; i++){
+
+    if(currentPlay[i].getAttribute('data-index') == params.playId) {
+      if(params.isCompWon) {
+        document.querySelector('table tr #comp-move').classList.add('winner');
+      } else {
+        document.querySelector('table tr #player-move').classList.add('winner');
+    }
+  
+  }*/

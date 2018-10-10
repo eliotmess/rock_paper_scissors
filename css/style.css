@@ -1,57 +1,363 @@
 /*
 RESET
 */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
 
-body { line-height: 1; }
+body {
+  line-height: 1;
+}
 
-ol, ul { list-style: none; }
+ol, ul {
+  list-style: none;
+}
 
-button { border: none; outline: none; margin: 0; }
+button {
+  border: none;
+  outline: none;
+  margin: 0;
+}
 
-blockquote, q { quotes: none; }
+blockquote, q {
+  quotes: none;
+}
 
-blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
 
-table { border-collapse: collapse; border-spacing: 0; }
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 
-.container .game-area .player-answer button, .container .interface-area .game-new { padding: 20px 35px; font-size: 50px; color: white; background: #010101; border: 4px solid #94FEED; font-family: 'VT323', monospace; }
+.container .game-area .player-answer button, .container .interface-area .game-new {
+  padding: 20px 35px;
+  font-size: 50px;
+  color: white;
+  background: #010101;
+  border: 4px solid #94FEED;
+  font-family: 'VT323', monospace;
+}
 
-.container .game-area .player-answer button:hover, .container .interface-area .game-new:hover { background: #d02751; cursor: pointer; }
+.container .game-area .player-answer button:hover, .container .interface-area .game-new:hover {
+  background: #d02751;
+  cursor: pointer;
+}
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-body { margin: 0; font-family: 'VT323', monospace; background: #747474; }
+body {
+  margin: 0;
+  font-family: 'VT323', monospace;
+  background: #747474;
+}
 
-main { background: #747474; height: 100vh; }
+main {
+  background: #747474;
+  padding-top: 200px;
+}
 
-header { background: #010101; padding: 30px 0; }
+header {
+  background: #010101;
+  height: 200px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
 
-header h1 { font-size: 100px; padding-bottom: 15px; color: #d02751; text-align: center; }
+header h1 {
+  font-size: 100px;
+  color: #d02751;
+  padding-bottom: 6px;
+}
 
-header .game-end { text-align: center; color: #EDC472; font-size: 40px; }
+header .game-end {
+  text-align: center;
+  color: #EDC472;
+  font-size: 40px;
+}
 
-.container { display: -ms-flexbox; display: flex; max-width: 1500px; margin: 0 auto; }
+.container {
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1500px;
+  margin: 0 auto;
+  min-height: calc(100vh - 200px);
+}
 
-.container .game-area { padding: 40px 10px; width: 66%; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; -ms-flex-align: center; align-items: center; height: 100vh; }
+.container .overlay {
+  display: none;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+}
 
-.container .game-area .comp { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; padding-bottom: 100px; padding-top: 30px; }
+.container .overlay.show {
+  display: -ms-flexbox;
+  display: flex;
+}
 
-.container .game-area .comp .comp-answer { width: 250px; height: 250px; border: 8px solid #94FEED; background: #010101; color: white; display: -ms-flexbox; display: flex; -ms-flex-pack: center; justify-content: center; -ms-flex-align: center; align-items: center; font-size: 70px; }
+.container .overlay .modal {
+  padding: 25px 50px;
+  background: #010101;
+  border: 8px solid #94FEED;
+  display: none;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  text-transform: uppercase;
+}
 
-.container .game-area .comp img { height: 300px; width: auto; padding-right: 60px; }
+.container .overlay .modal h2 {
+  font-size: 85px;
+  color: #d02751;
+}
 
-.container .game-area h2 { padding-bottom: 75px; text-align: center; font-size: 70px; color: #EDC472; }
+.container .overlay .modal p {
+  color: #EDC472;
+  font-size: 30px;
+}
 
-.container .game-area .player-answer { display: -ms-flexbox; display: flex; padding: 10px; -ms-flex-pack: space-evenly; justify-content: space-evenly; width: 100%; padding: 0 0 100px 0; }
+.container .overlay .modal p:first-of-type {
+  padding-bottom: 25px;
+}
 
-.container .interface-area { background: #006332; width: 34%; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; padding: 50px 35px; -ms-flex-align: center; align-items: center; }
+.container .overlay .modal p.close-modal-press {
+  padding-top: 25px;
+  padding-bottom: 0;
+  animation: .5s click-to-continue infinite;
+}
 
-.container .interface-area .output { height: 350px; width: 100%; background: #010101; overflow-y: scroll; font-size: 20px; line-height: 1.5; padding: 0 25px; color: #ffffff; margin-bottom: 50px; }
+@keyframes click-to-continue {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 
-.container .interface-area .score { font-size: 115px; color: white; width: 100%; text-align: center; color: #EDC472; padding-bottom: 50px; }
+.container .overlay .modal .score-table-wrapper {
+  max-height: 300px;
+  overflow: auto;
+}
 
-footer { background: #006332; padding: 20px; color: white; font-size: 30px; text-align: center; }
+.container .overlay .modal .score-table-wrapper::-webkit-scrollbar {
+  width: 20px;
+  background: #d02751;
+}
+
+.container .overlay .modal .score-table-wrapper::-webkit-scrollbar-track {
+  border: 2px solid #d02751;
+}
+
+.container .overlay .modal .score-table-wrapper::-webkit-scrollbar-thumb {
+  background: #010101;
+  border: 2px solid #d02751;
+  border-left: none;
+}
+
+.container .overlay .modal .score-table-wrapper table {
+  border: 2px solid #d02751;
+  border-right: none;
+}
+
+.container .overlay .modal .score-table-wrapper table th, .container .overlay .modal .score-table-wrapper table td {
+  line-height: 1.8;
+  width: 100px;
+  font-size: 25px;
+  text-align: center;
+  color: white;
+}
+
+.container .overlay .modal .score-table-wrapper table th:nth-child(2), .container .overlay .modal .score-table-wrapper table th:nth-child(3), .container .overlay .modal .score-table-wrapper table td:nth-child(2), .container .overlay .modal .score-table-wrapper table td:nth-child(3) {
+  width: 145px;
+}
+
+.container .overlay .modal .score-table-wrapper table th.winner, .container .overlay .modal .score-table-wrapper table td.winner {
+  background: #d02751;
+}
+
+.container .overlay .modal.show {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .game-area {
+  padding: 40px 10px;
+  width: 66%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.container .game-area .comp {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding-bottom: 100px;
+  padding-top: 30px;
+}
+
+.container .game-area .comp .comp-answer {
+  width: 250px;
+  height: 250px;
+  border: 8px solid #94FEED;
+  background: #010101;
+  color: white;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  font-size: 70px;
+}
+
+.container .game-area .comp .comp-answer div.move {
+  color: #d02751;
+  position: relative;
+  animation: screensaver 5s linear infinite;
+}
+
+@keyframes screensaver {
+  0% {
+    left: 33.5%;
+    bottom: 25%;
+  }
+  20% {
+    left: -5%;
+    bottom: 40%;
+  }
+  47% {
+    left: -36%;
+    bottom: 4%;
+  }
+  73% {
+    left: 10%;
+    bottom: -36%;
+  }
+  100% {
+    left: 33.5%;
+    bottom: 25%;
+  }
+}
+
+.container .game-area .comp img {
+  height: 300px;
+  width: auto;
+  padding-right: 60px;
+}
+
+.container .game-area h2 {
+  padding-bottom: 75px;
+  text-align: center;
+  font-size: 70px;
+  color: #EDC472;
+}
+
+.container .game-area .player-answer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: space-evenly;
+      justify-content: space-evenly;
+  width: 100%;
+  padding: 0 0 100px 0;
+}
+
+.container .interface-area {
+  background: #006332;
+  width: 34%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  padding: 50px 35px;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.container .interface-area .output {
+  height: 350px;
+  width: 100%;
+  background: #010101;
+  overflow-y: scroll;
+  font-size: 20px;
+  line-height: 1.5;
+  padding: 0 25px;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.container .interface-area .score {
+  font-size: 115px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  color: #EDC472;
+  padding-bottom: 50px;
+}
+
+footer {
+  background: #006332;
+  padding: 10px;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+/*# sourceMappingURL=style.css.map */

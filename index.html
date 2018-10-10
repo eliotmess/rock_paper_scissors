@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-EN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +16,27 @@
             <div class="game-end" id='gameend'>
         </header>
         <div class="container">
+            <div class="overlay" id="modal-overlay">
+                <div class="modal modal-game-over">
+                    <div class="game-over-message">
+                    </div>
+                    <div class="score-table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>round</th>
+                                    <th>comp's move</th>
+                                    <th>your move</th>
+                                    <th>score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="close-modal-press">PRESS SPACE TO CLOSE</p>
+                </div>
+            </div>
             <div class="game-area">
                 <div class="comp">
                     <img src="http://pixelartmaker.com/art/f1dd5233ac80be4.png" alt="">
