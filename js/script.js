@@ -75,20 +75,20 @@ var compDecision = function(event) {
 var moveCompare = function() {
   params.playId++;
   if ( (params.playerMove === 'PAPER' && params.compMove === 'ROCK') || (params.playerMove === 'SCISSORS' && params.compMove === 'PAPER') || (params.playerMove === 'ROCK' && params.compMove === 'SCISSORS') ) {
-    output.insertAdjacentHTML("afterbegin", ' You Win! ' + ' You chose ' +  params.playerMove + ' and played computer\'s ' + params.compMove +  '<br>');
+    output.insertAdjacentHTML("afterbegin", ' You Win! ' + ' You chose ' +  params.playerMove + ', ' + params.userName.toUpperCase() + ' and played computer\'s ' + params.compMove +  '<br>');
     params.playerWin ++;
     params.isCompWon = false;
     params.isDraw = false;
     tableResult = document.getElementById('result').innerHTML= params.compWin + ' : ' + params.playerWin;
   } else if ( (params.playerMove === 'ROCK' && params.compMove === 'PAPER') || (params.playerMove === 'PAPER' && params.compMove === 'SCISSORS') || (params.playerMove === 'SCISSORS' && params.compMove === 'ROCK') ) {
-    output.insertAdjacentHTML("afterbegin", ' You Lose! ' + ' You chose ' +  params.playerMove + ' and computer got you good with ' + params.compMove +  '<br>');
+    output.insertAdjacentHTML("afterbegin", ' You Lose! ' + ' You chose ' +  params.playerMove + ', ' + params.userName.toUpperCase() + ' and computer got you good with ' + params.compMove +  '<br>');
     params.isCompWon = true;
-    params.isDraw = false; // dlaczego nie !params.isDraw ? Jak uniknąć powtórzeń?
+    params.isDraw = false;
     params.compWin ++;
     tableResult = document.getElementById('result').innerHTML= params.compWin + ' : ' + params.playerWin;
   } else {
     params.isDraw = true;
-    output.insertAdjacentHTML("afterbegin", ' It\'s a tie! ' + ' You chose ' +  params.playerMove + ' and computer guess what - ' + params.compMove +  '<br>');
+    output.insertAdjacentHTML("afterbegin", ' It\'s a tie! ' + ' You chose ' +  params.playerMove + ', ' + params.userName.toUpperCase() + ' and computer guess what - ' + params.compMove +  '<br>');
   }
   scoreTable();
 };
@@ -110,7 +110,6 @@ newGameBtn.addEventListener('click', function() {
 
 
 // MODALE
-// jeśli modal nie jest połączony z buttonem tylko otwiera go wywołanie danej funkcji - czy da się skrócić zapis podobnie jak wcześniej
 var showModalGameOver = function() {
   document.querySelector('#modal-overlay').classList.add('show');
   document.querySelector('.modal-game-over').classList.add('show');
@@ -135,7 +134,7 @@ for(i = 0; i < closeModalButtons.length; i++){
 }
 
 document.addEventListener('keydown', function(e) {
-  if(e.keyCode === 32) {
+  if(e.keyCode === 32 && document.querySelector('.modal-game-over').classList.contains('show')) {
       hideModal();
   }
 });
@@ -147,10 +146,10 @@ document.querySelector('.modal-new-game button[type="submit"]').addEventListener
   params.targetScore = document.querySelector('.modal-new-game input[type="number"]').value;
   params.userName = document.querySelector('.modal-new-game input[type="text"]').value;
 
-  if(params.targetScore.length > 0 && params.targetScore > 0){
+  if(params.targetScore.length > 0 && params.targetScore && params.userName.length > 0){
     hideModal();
     params.targetScore = Math.round(params.targetScore);
-    document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + params.targetScore + ' WINS ' + params.userName + '. MAY THE BEST MAN WIN.';
+    document.getElementById('gameend').innerHTML= 'YOU PLAY TILL ' + params.targetScore + ' WINS ' + params.userName.toUpperCase() + '. MAY THE BEST MAN WIN.';
   } else {
     document.querySelector('form div').innerHTML = '<p>Error! Put correct data.</p>';
   }

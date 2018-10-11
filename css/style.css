@@ -57,9 +57,13 @@ table {
   border-spacing: 0;
 }
 
+html {
+  font-size: calc(14px + (20 - 14) * ((100vw - 1200px) / (2000 - 1200)));
+}
+
 .container .overlay .modal form button, .container .game-area .player-answer button, .container .interface-area .game-new {
-  padding: 20px 35px;
-  font-size: 50px;
+  padding: 1rem 1.75rem;
+  font-size: 2.5rem;
   color: white;
   background: #010101;
   border: 4px solid #94FEED;
@@ -83,12 +87,13 @@ body {
 
 main {
   background: #747474;
-  padding-top: 200px;
 }
 
 header {
   background: #010101;
-  height: 200px;
+  height: 20vh;
+  min-height: 150px;
+  max-height: 250px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -97,14 +102,10 @@ header {
       align-items: center;
   -ms-flex-direction: column;
       flex-direction: column;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
 }
 
 header h1 {
-  font-size: 100px;
+  font-size: 5rem;
   color: #d02751;
   padding-bottom: 6px;
 }
@@ -112,7 +113,7 @@ header h1 {
 header .game-end {
   text-align: center;
   color: #EDC472;
-  font-size: 40px;
+  font-size: 2rem;
 }
 
 .container {
@@ -120,7 +121,9 @@ header .game-end {
   display: flex;
   max-width: 1500px;
   margin: 0 auto;
-  min-height: calc(100vh - 200px);
+  height: 80vh;
+  min-height: calc(100vh - 250px);
+  max-height: calc(100vh - 150px);
 }
 
 .container .overlay {
@@ -161,7 +164,7 @@ header .game-end {
   top: 20px;
   right: 20px;
   color: #d02751;
-  font-size: 30px;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
@@ -171,13 +174,13 @@ header .game-end {
 }
 
 .container .overlay .modal h2 {
-  font-size: 85px;
+  font-size: 4.25rem;
   color: #d02751;
 }
 
 .container .overlay .modal p {
   color: #EDC472;
-  font-size: 30px;
+  font-size: 1.5rem;
 }
 
 .container .overlay .modal p:first-of-type {
@@ -210,14 +213,14 @@ header .game-end {
 
 .container .overlay .modal form label {
   color: #EDC472;
-  font-size: 35px;
+  font-size: 1.75rem;
   padding: 20px 0 10px 0;
 }
 
 .container .overlay .modal form input {
   line-height: 1.5;
-  font-size: 30px;
-  padding: 10px 25px;
+  font-size: 1.5rem;
+  padding: .5rem 1.25rem;
   width: 400px;
   background: #010101;
   border: 2px solid #94FEED;
@@ -240,8 +243,8 @@ header .game-end {
       -ms-grid-row-align: center;
       align-self: center;
   margin: 40px 0 20px 0;
-  padding: 15px 50px;
-  font-size: 35px;
+  padding: .75rem 2.5rem;
+  font-size: 1.75rem;
 }
 
 .container .overlay .modal .score-table-wrapper {
@@ -272,7 +275,7 @@ header .game-end {
 .container .overlay .modal .score-table-wrapper table th, .container .overlay .modal .score-table-wrapper table td {
   line-height: 1.8;
   width: 100px;
-  font-size: 25px;
+  font-size: 1.25rem;
   text-align: center;
   color: white;
 }
@@ -306,8 +309,8 @@ header .game-end {
   display: flex;
   -ms-flex-align: center;
       align-items: center;
-  padding-bottom: 100px;
-  padding-top: 30px;
+  padding-bottom: 5rem;
+  padding-top: 1.5rem;
 }
 
 .container .game-area .comp .comp-answer {
@@ -361,9 +364,9 @@ header .game-end {
 }
 
 .container .game-area h2 {
-  padding-bottom: 75px;
+  padding-bottom: 3.75rem;
   text-align: center;
-  font-size: 70px;
+  font-size: 3.5rem;
   color: #EDC472;
 }
 
@@ -373,7 +376,6 @@ header .game-end {
   -ms-flex-pack: space-evenly;
       justify-content: space-evenly;
   width: 100%;
-  padding: 0 0 100px 0;
 }
 
 .container .interface-area {
@@ -383,7 +385,7 @@ header .game-end {
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
-  padding: 50px 35px;
+  padding: 2.5rem 1.75rem;
   -ms-flex-align: center;
       align-items: center;
 }
@@ -393,11 +395,11 @@ header .game-end {
   width: 100%;
   background: #010101;
   overflow-y: scroll;
-  font-size: 20px;
+  font-size: 1rem;
   line-height: 1.5;
   padding: 0 25px;
   color: white;
-  margin-bottom: 50px;
+  margin-bottom: 2.5rem;
 }
 
 .container .interface-area .output::-webkit-scrollbar {
@@ -410,19 +412,19 @@ header .game-end {
 }
 
 .container .interface-area .score {
-  font-size: 115px;
+  font-size: 5.75rem;
   color: white;
   width: 100%;
   text-align: center;
   color: #EDC472;
-  padding-bottom: 50px;
+  padding-bottom: 2.5rem;
 }
 
 footer {
   background: #006332;
   padding: 10px;
   color: white;
-  font-size: 30px;
+  font-size: 1.5rem;
   text-align: center;
   position: fixed;
   left: 0;
