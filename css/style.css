@@ -108,6 +108,7 @@ header h1 {
   font-size: 5rem;
   color: #d02751;
   padding-bottom: 6px;
+  text-align: center;
 }
 
 header .game-end {
@@ -119,11 +120,10 @@ header .game-end {
 .container {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column-reverse;
+      flex-direction: column-reverse;
   max-width: 1500px;
   margin: 0 auto;
-  height: 80vh;
-  min-height: calc(100vh - 250px);
-  max-height: calc(100vh - 150px);
 }
 
 .container .overlay {
@@ -147,7 +147,9 @@ header .game-end {
 }
 
 .container .overlay .modal {
-  padding: 25px 50px;
+  padding: 25px 0;
+  width: 100%;
+  margin: 0 10px;
   background: #010101;
   border: 8px solid #94FEED;
   display: none;
@@ -221,7 +223,7 @@ header .game-end {
   line-height: 1.5;
   font-size: 1.5rem;
   padding: .5rem 1.25rem;
-  width: 400px;
+  width: 250px;
   background: #010101;
   border: 2px solid #94FEED;
   color: white;
@@ -295,7 +297,6 @@ header .game-end {
 
 .container .game-area {
   padding: 40px 10px;
-  width: 66%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -361,6 +362,7 @@ header .game-end {
   height: 300px;
   width: auto;
   padding-right: 60px;
+  display: none;
 }
 
 .container .game-area h2 {
@@ -380,17 +382,18 @@ header .game-end {
 
 .container .interface-area {
   background: #006332;
-  width: 34%;
+  width: 100%;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
   padding: 2.5rem 1.75rem;
   -ms-flex-align: center;
       align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 
 .container .interface-area .output {
+  display: none;
   height: 350px;
   width: 100%;
   background: #010101;
@@ -414,10 +417,9 @@ header .game-end {
 .container .interface-area .score {
   font-size: 5.75rem;
   color: white;
-  width: 100%;
+  margin-right: 10vw;
   text-align: center;
   color: #EDC472;
-  padding-bottom: 2.5rem;
 }
 
 footer {
@@ -430,5 +432,43 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    -ms-flex-direction: row;
+        flex-direction: row;
+    height: 80vh;
+    min-height: calc(100vh - 250px);
+    max-height: calc(100vh - 150px);
+  }
+  .container .overlay .modal {
+    padding: 25px 50px;
+    width: auto;
+  }
+  .container .overlay .modal form input {
+    width: 400px;
+  }
+  .container .game-area {
+    width: 66%;
+  }
+  .container .game-area .comp img {
+    display: block;
+  }
+  .container .interface-area {
+    width: 34%;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: start;
+        justify-content: flex-start;
+  }
+  .container .interface-area .output {
+    display: block;
+  }
+  .container .interface-area .score {
+    width: 100%;
+    margin: 0;
+    padding-bottom: 2.5rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */

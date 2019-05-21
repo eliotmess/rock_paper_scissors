@@ -1,16 +1,14 @@
 'use strict';
 
-
 //parametry gry
 
 var params = {};
-
 params.gameContinue = true;
 params.playerWin = 0;
 params.compWin = 0;
 params.playId = 0;
 
-var tableResult = document.getElementById('result').innerHTML= params.playerWin + ' : ' + params.compWin;
+document.getElementById('result').innerHTML = params.playerWin + ' : ' + params.compWin;
 var compAnswer = document.getElementById('comp-answer');
 var newGameBtn = document.getElementById('newgame');
 var output = document.getElementById('output');
@@ -33,7 +31,7 @@ var gameEnd = function() {
     compAnswer.innerHTML= '<div> ;-) </div>';
     document.querySelector('#comp-answer div').classList.add('move');
     params.gameContinue = false;
-  };
+  }
 };
 
 //funkcje przycisków ruchów
@@ -55,8 +53,7 @@ for (var i = 0; i < moveBtns.length; i++){
 
 // Generator ruchu komputera
 
-var compDecision = function(event) {
-
+var compDecision = function() {
   params.compRandom = Math.floor( Math.random() * 3 + 1 );
 
   if (params.compRandom === 1) {
@@ -66,26 +63,25 @@ var compDecision = function(event) {
   } else {
     params.compMove = 'SCISSORS';
   }
-  compAnswer.innerHTML = params.compMove
-;
+  compAnswer.innerHTML = params.compMove;
 };
 
 // PORÓWNANIE WYNIKÓW
 
 var moveCompare = function() {
   params.playId++;
-  if ( (params.playerMove === 'PAPER' && params.compMove === 'ROCK') || (params.playerMove === 'SCISSORS' && params.compMove === 'PAPER') || (params.playerMove === 'ROCK' && params.compMove === 'SCISSORS') ) {
+  if ((params.playerMove === 'PAPER' && params.compMove === 'ROCK') || (params.playerMove === 'SCISSORS' && params.compMove === 'PAPER') || (params.playerMove === 'ROCK' && params.compMove === 'SCISSORS')) {
     output.insertAdjacentHTML("afterbegin", ' You Win! ' + ' You chose ' +  params.playerMove + ', ' + params.userName.toUpperCase() + ' and played computer\'s ' + params.compMove +  '<br>');
     params.playerWin ++;
     params.isCompWon = false;
     params.isDraw = false;
-    tableResult = document.getElementById('result').innerHTML= params.compWin + ' : ' + params.playerWin;
+    document.getElementById('result').innerHTML = params.compWin + ' : ' + params.playerWin;
   } else if ( (params.playerMove === 'ROCK' && params.compMove === 'PAPER') || (params.playerMove === 'PAPER' && params.compMove === 'SCISSORS') || (params.playerMove === 'SCISSORS' && params.compMove === 'ROCK') ) {
     output.insertAdjacentHTML("afterbegin", ' You Lose! ' + ' You chose ' +  params.playerMove + ', ' + params.userName.toUpperCase() + ' and computer got you good with ' + params.compMove +  '<br>');
     params.isCompWon = true;
     params.isDraw = false;
     params.compWin ++;
-    tableResult = document.getElementById('result').innerHTML= params.compWin + ' : ' + params.playerWin;
+    document.getElementById('result').innerHTML = params.compWin + ' : ' + params.playerWin;
   } else {
     params.isDraw = true;
     output.insertAdjacentHTML("afterbegin", ' It\'s a tie! ' + ' You chose ' +  params.playerMove + ', ' + params.userName.toUpperCase() + ' and computer guess what - ' + params.compMove +  '<br>');
@@ -101,7 +97,7 @@ newGameBtn.addEventListener('click', function() {
     params.playerWin = 0;
     params.compWin = 0;
     compAnswer.innerHTML='';
-    tableResult = document.getElementById('result').innerHTML= params.playerWin + ' : ' + params.compWin;
+    document.getElementById('result').innerHTML = params.playerWin + ' : ' + params.compWin;
     showModalNewGame();
     document.querySelector('form div').innerHTML = '';
     params.playId = 0;
@@ -110,6 +106,7 @@ newGameBtn.addEventListener('click', function() {
 
 
 // MODALE
+
 var showModalGameOver = function() {
   document.querySelector('#modal-overlay').classList.add('show');
   document.querySelector('.modal-game-over').classList.add('show');
@@ -137,6 +134,13 @@ document.addEventListener('keydown', function(e) {
   if(e.keyCode === 32 && document.querySelector('.modal-game-over').classList.contains('show')) {
       hideModal();
   }
+});
+
+document.querySelector('#modal-overlay').addEventListener('click', function(e) {
+  if ((e.target).closest('.modal')) {
+    return;
+  }
+  hideModal();
 });
 
 // modal - new game
@@ -174,7 +178,5 @@ function scoreTable() {
         gameData[i].querySelector('#player-move').classList.add('winner');
       }
     }
-  };
-  
-  
-  };
+  }  
+}

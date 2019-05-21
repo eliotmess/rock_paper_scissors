@@ -1,7 +1,7 @@
 {
-  "name": "task-3",
+  "name": "rock-paper-scissors",
   "version": "1.0.0",
-  "description": "https://eliotmess.github.io/task-3/",
+  "description": "https://github.com/eliotmess/rock_paper_scissors",
   "main": "index.js",
   "scripts": {
     "test": "npm-run-all test:*",
@@ -21,15 +21,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eliotmess/task-3.git"
+    "url": "git+https://github.com/eliotmess/rock_paper_scissors"
   },
   "keywords": [],
   "author": "Grzes Olejniczak",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eliotmess/task-3/issues"
+    "url": "https://github.com/eliotmess/rock_paper_scissors/issues"
   },
-  "homepage": "https://github.com/eliotmess/task-3#readme",
+  "homepage": "https://github.com/eliotmess/rock_paper_scissors#readme",
   "devDependencies": {
     "autoprefixer-cli": "^1.0.0",
     "browser-sync": "^2.24.6",
